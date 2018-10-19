@@ -42,7 +42,7 @@ podTemplate(label: 'mypod', containers: [
             }
 
             container('docker') {
-                sh "docker build -t khinkali/${projectName}:${env.VERSION} ."
+                sh "docker build --no-cache -t khinkali/${projectName}:${env.VERSION} ."
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
                     sh "docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}"
                 }
